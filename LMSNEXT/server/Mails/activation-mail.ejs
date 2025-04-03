@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>LMS activation Email</title>
+    <meta http-equiv="content-Type" content="text/html" charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style type="text/css">
+      /* base */
+      body {
+        margin: 0;
+        padding: 0;
+        max-width: 100%;
+        font-family: Arial, sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+        background-color: #fafafa;
+        color: #222222;
+      }
+
+      a {
+        text-decoration: none;
+        color: #000;
+      }
+
+      h1 {
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 1.25;
+        text-align: center;
+        margin-top: 0;
+        margin-bottom: 15px;
+      }
+      p {
+        margin-top: 0;
+        margin-bottom: 24px;
+      }
+
+      table td {
+        vertical-align: top;
+      }
+
+      /* layout  */
+
+      .email-wrapper {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .email-hader {
+        background-color: #0070f3;
+        padding: 24px;
+        color: #ffffff;
+      }
+
+      .emai-body {
+        padding: 24px;
+        background-color: #ffffff;
+      }
+
+      .email-footer {
+        padding: 24px;
+        background-color: #f6f6f6;
+      }
+
+      /* button */
+
+      .button {
+        display: inline-block;
+        padding: 8px 16px;
+        background-color: #0070f3;
+        color: #ffffff;
+        font-size: 16px;
+        padding: 12px 24px;
+        font-weight: 700;
+        border-radius: 4px;
+        text-align: center;
+        text-decoration: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div>
+      <div class="email-wrapper">
+        <div class="email-hader">
+          <h1>Welcome to LMS</h1>
+        </div>
+        <div class="emai-body">
+          <p>Hi <%= user.name %>,</p>
+          <p>
+            Thanks for registering with LMS. To activate your account,please use
+            the following activation code:
+          </p>
+          <h2><%= activationCode %></h2>
+          <p>
+            Please enter this code on the activation page with in the next 5
+            minutes.
+          </p>
+          <p>
+            If you didn't register for a LMS account,please ignore this email.
+          </p>
+        </div>
+        <div class="email-footer">
+          <p>
+            Thanks, <br />
+            The LMS team
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
