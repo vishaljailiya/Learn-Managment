@@ -31,12 +31,15 @@ interface ICourseData extends Document {
   questions: IComment[];
 }
 
-interface ICourse extends Document {
+export interface ICourse extends Document {
   name: string;
   description: string;
   price: number;
   estimatedPrice?: number;
-  thumbnail: object;
+  thumbnail: {
+    public_id: string;
+    url: string;
+  };
   tags: string;
   level: string;
   demoUrl: string;
@@ -70,7 +73,6 @@ const commentSchema = new Schema<IComment>({
 
 const courseDataSchema = new Schema<ICourseData>({
   videoUrl: String,
-  videoThumbnail: Object,
   videoSection: String,
   videoLength: Number,
   videoPlayer: String,
@@ -100,11 +102,9 @@ const courseSchema = new Schema<ICourse>(
     },
     thumbnail: {
       public_id: {
-        required: true,
         type: String,
       },
       url: {
-        required: true,
         type: String,
       },
     },

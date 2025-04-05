@@ -3,7 +3,21 @@ import { app } from "./app";
 import { v2 as cloudinary } from "cloudinary";
 import connectDB from "./utils/db";
 import dotenv from "dotenv";
-dotenv.config();
+import { configureCloudinary } from "./utils/cloudinary";
+
+// Handling uncaught exceptions
+process.on("uncaughtException", (err: Error) => {
+  console.log(`Error: ${err.message}`);
+  console.log(`Shutting down the server due to uncaught exception`);
+  process.exit(1);
+});
+
+// Config
+if (process.env.NODE_ENV !== "PRODUCTION") {
+  require("dotenv").config({
+    path: "./.env",
+  });
+}
 
 console.log("ACCESS_TOKEN:", process.env.ACCESS_TOKEN); // Debug log
 // cloudinary config
@@ -13,9 +27,23 @@ cloudinary.config({
   api_secret: process.env.CLOUD_SECRET_KEY,
 });
 
-// create server
+// Connect to database
+connectDB();
 
-app.listen(process.env.PORT, () => {
-  console.log(`serevr is start to post ${process.env.PORT}`);
-  connectDB();
+// Configure cloudinary
+configureCloudinary();
+
+// Create server
+const server = app.listen(process.env.PORT || 8000, () => {
+  console.log(`Server is running on port ${process.env.PORT || 8000}`);
+});
+
+// Unhandled promise rejection
+process.on("unhandledRejection", (err: Error) => {
+  console.log(`Error: ${err.message}`);
+  console.log(`Shutting down the server due to unhandled promise rejection`);
+
+  server.close(() => {
+    process.exit(1);
+  });
 });
